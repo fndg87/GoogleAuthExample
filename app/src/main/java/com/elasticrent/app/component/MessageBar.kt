@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.elasticrent.app.Domain.model.MessageBarState
@@ -50,7 +51,7 @@ fun Messagebar(messageBarState: MessageBarState){
                     "Internet Connection unavailable"
                 }
                 else ->{
-                    "${messageBarState.error.message}"
+                    "${messageBarState.error?.message}"
                 }
             }
         }
@@ -62,15 +63,15 @@ fun Messagebar(messageBarState: MessageBarState){
     AnimatedVisibility(
         visible = (
                 messageBarState.error!=null && startAnimation
-                        || messageBarState.message!=null && startAnimation,
+                        || messageBarState.message!=null && startAnimation),
                 enter = expandVertically(animationSpec = tween(300), expandFrom = Alignment.Top),
                 exit = shrinkVertically(animationSpec = tween(durationMillis = 300), shrinkTowards = Alignment.Top)
     ) {
       Row(modifier = Modifier
           .fillMaxWidth()
           .background(if(messageBarState.error!=null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
-          .padding(40.dp)
-          .height(40.dp),
+          .padding(20.dp)
+          .height(20.dp),
           verticalAlignment = Alignment.CenterVertically
       ) {
           Icon(
@@ -83,10 +84,52 @@ fun Messagebar(messageBarState: MessageBarState){
               text = if(messageBarState.error !=null) errorMsg else messageBarState.message.toString(),
               color=Color.White,
               fontWeight = FontWeight.Bold,
-              fontSize = 16.sp,
+              fontSize = 8.sp,
               overflow = TextOverflow.Ellipsis,
               maxLines = 1
           )
       }
     }
+}
+@Composable
+fun Message(messageBarState: MessageBarState, errorMsg:String){
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .background(if(messageBarState.error!=null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
+        .padding(40.dp)
+        .height(40.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = if(messageBarState.error!=null) Icons.Default.Warning else Icons.Default.Check,
+            contentDescription = "Message Bar Icon",
+            tint = Color.White
+        )
+        Divider(modifier = Modifier.width(12.dp), color = Color.Transparent)
+        Text(
+            text = if(messageBarState.error !=null) errorMsg else messageBarState.message.toString(),
+            color=Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+        )
+    }
+}
+
+@Preview
+@Composable
+fun MessagePreview(){
+    Message(
+        messageBarState = MessageBarState(message = "Successsfully updated."),
+        errorMsg = "Internet Unavailable"
+    )
+}
+@Preview
+@Composable
+fun MessagePreviewError(){
+    Message(
+        messageBarState = MessageBarState(error = SocketTimeoutException()),
+        errorMsg = "Internet Unavailable"
+    )
 }

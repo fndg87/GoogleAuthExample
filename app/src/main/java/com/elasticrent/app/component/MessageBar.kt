@@ -31,7 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.elasticrent.app.Domain.model.MessageBarState
+import com.elasticrent.app.domain.model.MessageBarState
 import kotlinx.coroutines.delay
 import java.net.ConnectException
 import java.net.SocketTimeoutException

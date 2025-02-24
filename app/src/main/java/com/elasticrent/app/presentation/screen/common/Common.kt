@@ -62,23 +62,8 @@ fun StartActivityForResult(
         launcher(activityLauncher)
     }
 }
-fun signIn(
-    activity: Activity,
-    launchActivityResult: (IntentSenderRequest)-> Unit
-){
-    val oneTapClient = Identity.getSignInClient(activity)
 
-    val signInRequest = BeginSignInRequest.builder()
-        .setGoogleIdTokenRequestOptions(
-            BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                .setSupported(true)
-                .setServerClientId(CLIENT_ID)
-                .setFilterByAuthorizedAccounts(true)
-                .build()
-        ).setAutoSelectEnabled(true)
-        .build()
-
-    fun signUp(
+fun signUp(
         activity: Activity,
         launchActivityResult: (IntentSenderRequest) -> Unit,
         accountNotFound: () -> Unit
@@ -150,5 +135,3 @@ fun signIn(
                 )
             }
     }
-    
-}

@@ -5,8 +5,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.elasticrent.app.data.DataStoreOperationsImpl
-import com.elasticrent.app.data.RepositoryImpl
+import com.elasticrent.app.data.remote.GoogleAuthKtorAPI
+import com.elasticrent.app.data.repository.DataStoreOperationsImpl
+import com.elasticrent.app.data.repository.RepositoryImpl
 import com.elasticrent.app.domain.repository.DataStoreOperations
 import com.elasticrent.app.domain.repository.Repository
 import com.elasticrent.app.util.Constants.PREFERENCES_NAME
@@ -34,7 +35,15 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepository(dataStoreOperations: DataStoreOperations):Repository{
-        return RepositoryImpl(dataStoreOperations = dataStoreOperations)
+    fun provideRepository(
+        dataStoreOperations: DataStoreOperations,
+        googleAuthKtorAPI: GoogleAuthKtorAPI
+    ): Repository {
+        return RepositoryImpl(
+            dataStoreOperations = dataStoreOperations,
+            googleAuthKtorAPI = googleAuthKtorAPI
+        )
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.elasticrent.app.data
+package com.elasticrent.app.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

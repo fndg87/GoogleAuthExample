@@ -1,5 +1,6 @@
 package com.elasticrent.app.di
 
+import com.elasticrent.app.data.remote.GoogleAuthKtorAPI
 import com.elasticrent.app.util.Constants.BASE_URL
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -45,5 +46,10 @@ object NetworkModule {
             .build()
 
 
+    }
+    @Provides
+    @Singleton
+    fun provideGoogleAuthKtorAPI(retrofit: Retrofit): GoogleAuthKtorAPI {
+        return retrofit.create(GoogleAuthKtorAPI::class.java)
     }
 }

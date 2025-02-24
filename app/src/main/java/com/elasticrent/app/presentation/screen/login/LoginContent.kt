@@ -1,4 +1,4 @@
-package com.elasticrent.app.component
+package com.elasticrent.app.presentation.screen.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.elasticrent.app.domain.model.MessageBarState
 import com.elasticrent.app.R
+import com.elasticrent.app.components.GoogleButton
+import com.elasticrent.app.components.Messagebar
 
 @Composable
 fun LoginContent(

@@ -1,4 +1,4 @@
-package com.elasticrent.app.component
+package com.elasticrent.app.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
